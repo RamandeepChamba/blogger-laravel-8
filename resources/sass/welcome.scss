@@ -1,0 +1,94 @@
+#welcome-container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: $color-text-light;
+    background: $color-text-dark;
+    background: url('/images/landing.jpg');
+    background: linear-gradient(to bottom, rgba(#000, .7), 
+        rgba(#000, .7)),
+        url('/images/landing.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
+}
+
+#welcome-heading {
+    font-size: 4.5rem;
+    color: $color-text-light;
+    font-weight: 200;
+
+    @media screen and (min-width: $bp-md) {
+        font-size: 7rem;
+    }
+    @media screen and (min-width: $bp-lg) {
+        font-size: 8rem;
+    }
+    @media screen and (min-width: $bp-xlg) {
+        font-size: 10rem;
+    }
+}
+
+
+#welcome-sub-heading {
+    width: 80%;
+    text-align: center;
+    // padding: 0 2rem;
+    font-size: .9rem;
+    line-height: 130%;
+    color: $color-text-grey;
+    margin: 0 0 2rem 0;
+    
+    @media screen and (min-width: $bp-sm) {
+        font-size: 1rem;
+    }
+    @media screen and (min-width: 550px) {
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+        color: darken($color-text-grey, 10%);
+    }
+    @media screen and (min-width: $bp-md) {
+        font-size: 1.5rem;
+        color: darken($color-text-grey, 10%);
+    }
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: .4rem .8rem;
+    border-radius: 2rem;
+    font-size: .8rem;
+    font-weight: 500;
+    background: linear-gradient(to bottom, $color-primary 0%, $color-primary 50%, $color-text-light 50%);
+    background-position: top;
+    background-size: 100% 200%;
+    color: $color-text-dark;
+    transition: all .4s;
+
+    @media screen and (min-width: $bp-sm) {
+        &:hover {
+            background-position-y: bottom;
+            color: $color-primary-dark;
+            transform: scale(1.1);
+        }    
+    }
+
+    @media screen and (min-width: 550px) {
+        padding: .5rem 1rem;
+        font-size: 1rem;
+    }
+
+    @media screen and (min-width: $bp-md) {
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
+    }
+    
+    &:active {
+        transform: scale(0.9);
+    }
+}

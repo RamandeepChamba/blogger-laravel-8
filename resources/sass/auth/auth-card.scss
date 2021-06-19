@@ -1,0 +1,35 @@
+div.auth-form-container {
+    background: #ffe259;
+    background: linear-gradient(to bottom, #F7971E, #FFD200);
+}
+
+div.auth-form-logo {
+    display: block;
+    width: 200px;
+    transition: all .4s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(.9);
+    }
+
+    @media screen and (min-width: $bp-md) {
+        width: 250px;
+    }
+    @media screen and (min-width: $bp-lg) {
+        width: 300px;
+    }
+}
+
+button.auth-form-btn {
+    background: #F7971E;
+    transition: all .4s;
+    
+    &:hover {
+        background: #FFD200;
+        color: $color-text-dark;
+    }
+}
