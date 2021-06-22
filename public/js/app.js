@@ -12549,6 +12549,7 @@ function showProfile() {
     var editing = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
     // Disable Labels
     toggleInactiveLabels(false);
+    toggleAvatarEdit(false);
     var profileId = $('#profile-card').data('profileId'); // Disable inputs
 
     $('#profile-form #facebook_link').attr('disabled', true);
@@ -12630,11 +12631,12 @@ function showProfile() {
           // Hide
           $('#profile-form #twitter_link_absent').addClass('hidden');
         }
-      } // Enable Labels
+      } // Enable Labels and avatar edit
 
 
       if (!editing) {
         toggleInactiveLabels(true);
+        toggleAvatarEdit(true);
       }
     }).fail(function (msg) {
       console.log(msg);
@@ -12664,7 +12666,8 @@ function showProfile() {
   function cancelEditing() {
     if (document.getElementById('cancel-profile-btn')) {
       document.getElementById('cancel-profile-btn').addEventListener('click', function (e) {
-        // Disable Labels
+        removeErrors(); // Disable Labels
+
         toggleInactiveLabels(false); // Special case for social links
 
         var hasHiddenInputs = false;
@@ -12683,7 +12686,8 @@ function showProfile() {
   function submitProfile() {
     if (document.getElementById('save-profile-btn')) {
       document.getElementById('save-profile-btn').addEventListener('click', function (e) {
-        // Disable Labels
+        removeErrors(); // Disable Labels
+
         toggleInactiveLabels(false); // Disable save profile button
 
         $('#save-profile-btn').html('Saving...');
@@ -12731,9 +12735,8 @@ function showProfile() {
 
 
         toggleEditing(false, hasHiddenInputs);
-        console.log(msg);
-      }).fail(function (msg) {
-        console.log(msg);
+      }).fail(function (errors) {
+        showError(errors.responseJSON.errors);
       });
     }
   } // Get active section id
@@ -12775,6 +12778,17 @@ function showProfile() {
   function toggleActiveLabel(enable) {
     var activeLabel = document.querySelector('#profile-card-section-labels > button.active-section-label');
     activeLabel.disabled = !enable;
+  }
+
+  function toggleAvatarEdit(enable) {
+    var avatarInput = $('#profile-card-avatar');
+    avatarInput.attr('disabled', !enable);
+
+    if (!enable) {
+      $('#avatar-edit-btn').html('Wait...');
+    } else {
+      $('#avatar-edit-btn').html('Edit');
+    }
   } // Toggle editing
 
 
@@ -12793,11 +12807,13 @@ function showProfile() {
         getSocialLinks(true);
       } else {
         // Enable all input fields of active section
-        toggleActiveSectionInputs(true);
-      } // Disable inactive labels
+        toggleActiveSectionInputs(true); // Disable inactive labels
 
+        toggleInactiveLabels(false);
+        toggleActiveLabel(false); // Disable avatar edit
 
-      toggleInactiveLabels(false);
+        toggleAvatarEdit(false);
+      }
     } else {
       if (hasHiddenInputs) {
         // Hide inputs
@@ -12806,11 +12822,13 @@ function showProfile() {
         getSocialLinks();
       } else {
         // Disable all inputs fields of active section
-        toggleActiveSectionInputs(false);
-      } // Enable inactive labels
+        toggleActiveSectionInputs(false); // Enable inactive labels
 
+        toggleInactiveLabels(true); // Enable avatar edit
 
-      toggleInactiveLabels(true); // Enable save profile button
+        toggleAvatarEdit(true);
+      } // Enable save profile button
+
 
       $('#save-profile-btn').html('Save');
       $('#save-profile-btn').attr('disabled', false);
@@ -12831,7 +12849,7 @@ function showProfile() {
       if ($("#profile-card-avatar")) {
         // The very first image until save
         var src = $("#avatar").attr('src');
-        $("#profile-card-avatar").change(function () {
+        $("#profile-card-avatar").on('change', function () {
           readURL(this, src);
         }); // Cancel Avatar
 
@@ -12851,7 +12869,12 @@ function showProfile() {
         };
 
         reader.readAsDataURL(input.files[0]);
-        showEditBtns();
+        showEditBtns(); // Disable edit profile button
+
+        $('#edit-profile-btn').html('...Wait');
+        $('#edit-profile-btn').attr('disabled', true); // Disable labels
+
+        toggleInactiveLabels(false);
       } else {
         cancelAvatar(src);
       }
@@ -12862,7 +12885,7 @@ function showProfile() {
       var src = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
       if ($("#avatar-cancel-btn")) {
-        $("#avatar-cancel-btn").click(function () {
+        $("#avatar-cancel-btn").on('click', function () {
           cancelAvatar(src);
         });
       }
@@ -12873,15 +12896,23 @@ function showProfile() {
       $("#profile-card-avatar").val(null); // Hide save and cancel button
 
       $('#avatar-save-btn').hide();
-      $('#avatar-cancel-btn').hide();
+      $('#avatar-cancel-btn').hide(); // Enable labels
+
+      toggleInactiveLabels(true); // Enable edit profile button
+
+      $('#edit-profile-btn').html('Edit');
+      $('#edit-profile-btn').attr('disabled', false);
     } // Save avatar
 
 
     function saveAvatar() {
       if ($("#avatar-save-btn")) {
-        $("#avatar-save-btn").click(function () {
-          // disable cancel and save button and input
+        $("#avatar-save-btn").on('click', function () {
+          // Disable avatar edit button
+          toggleAvatarEdit(false); // disable cancel and save button and input
+
           $(this).attr('disabled', true);
+          $(this).html('..saving');
           $("#avatar-cancel-btn").attr('disabled', true);
           $("#profile-card-avatar").attr('disabled', true);
           var formData = new FormData();
@@ -12900,19 +12931,81 @@ function showProfile() {
             success: function success(res) {
               $('#avatar').attr('src', res.profile.avatar); // enable cancel and save button and input
 
+              $("#avatar-save-btn").html('Save');
               $("#avatar-save-btn").attr('disabled', false);
               $("#avatar-save-btn").hide();
               $("#avatar-cancel-btn").attr('disabled', false);
-              $("#avatar-cancel-btn").hide();
-              $("#profile-card-avatar").attr('disabled', false);
+              $("#avatar-cancel-btn").hide(); // Enable labels
+
+              toggleInactiveLabels(true); // Enable edit profile button
+
+              $('#edit-profile-btn').html('Edit');
+              $('#edit-profile-btn').attr('disabled', false); // Enable avatar edit button
+
+              toggleAvatarEdit(true);
             },
             error: function error(e) {
-              console.log(e);
+              showError(e.responseJSON.errors); // enable cancel and save button and input
+
+              $("#avatar-save-btn").html('Save');
+              $("#avatar-save-btn").attr('disabled', false);
+              $("#avatar-cancel-btn").attr('disabled', false);
+              toggleAvatarEdit(true);
             }
           });
         });
       }
     }
+  }
+
+  function removeErrors() {
+    $('.error-msg').remove();
+  } // Error handling
+
+
+  function showError(errors) {
+    // Social
+    if (errors.hasOwnProperty('name')) {
+      var error = "\n                <p class=\"error-msg\">".concat(errors.name, "</p>\n            ");
+      $('input#name').after(error);
+    } // About
+    else if (errors.hasOwnProperty('bio')) {
+        var _error = "\n                <p class=\"error-msg\">".concat(errors.bio, "</p>\n            ");
+
+        $('textarea#bio').after(_error);
+      } // Social
+      else if (errors.hasOwnProperty('facebook_link') || errors.hasOwnProperty('twitter_link')) {
+          // Both facebook and twitter
+          if (errors.hasOwnProperty('facebook_link') && errors.hasOwnProperty('twitter_link')) {
+            var error1 = "\n                <p class=\"error-msg\">".concat(errors.facebook_link, "</p>\n                ");
+            $('input#facebook_link').after(error1);
+            var error2 = "\n                <p class=\"error-msg\">".concat(errors.twitter_link, "</p>\n                ");
+            $('input#twitter_link').after(error2);
+          } // facebook only
+          else if (errors.hasOwnProperty('facebook_link')) {
+              var _error2 = "\n                <p class=\"error-msg\">".concat(errors.facebook_link, "</p>\n                ");
+
+              $('input#facebook_link').after(_error2);
+            } // twitter only
+            else {
+                var _error3 = "\n                <p class=\"error-msg\">".concat(errors.twitter_link, "</p>\n                ");
+
+                $('input#twitter_link').after(_error3);
+              }
+        } // Avatar
+        else if (errors.hasOwnProperty('avatar')) {
+            alert(errors.avatar);
+          } // Settings
+          else if (errors.hasOwnProperty('settings')) {
+              console.log('settings: ' + errors.settings);
+            } else {
+              console.log(errors);
+            } // Enable save profile button
+
+
+    $('#save-profile-btn').html('Save');
+    $('#save-profile-btn').attr('disabled', false);
+    $('#cancel-profile-btn').attr('disabled', false);
   }
 }
 

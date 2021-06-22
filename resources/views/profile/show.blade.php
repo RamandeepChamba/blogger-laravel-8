@@ -50,7 +50,7 @@
                     <!-- About -->
                     <div class="profile-card-section hidden" id="profile-card-section-about">
                         <label for="bio">Bio</label>
-                        <textarea name="bio" id="bio" cols="30" rows="2" placeholder="Describe yourself here..." disabled>{{ $user->profile->bio }}</textarea>
+                        <textarea name="bio" id="bio" placeholder="Describe yourself here..." disabled>{{ $user->profile->bio }}</textarea>
                     </div>
                     <!-- Social Links -->
                     <div class="profile-card-section hidden" id="profile-card-section-social-links">
@@ -75,7 +75,7 @@
                         </div>
                     @endif
                     
-                    <button type="button" class="bg-blue-200 hidden" id="cancel-profile-btn">Cancel</button>
+                    <button type="reset" class="bg-blue-200 hidden" id="cancel-profile-btn">Cancel</button>
                     <button class="bg-blue-200 hidden" id="save-profile-btn">Save</button>
                 </form>
             </div>

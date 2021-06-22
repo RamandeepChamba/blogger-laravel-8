@@ -71,6 +71,7 @@ function showProfile() {
     function getSocialLinks(editing = false) {
         // Disable Labels
         toggleInactiveLabels(false)
+        toggleAvatarEdit(false)
 
         let profileId = $('#profile-card').data('profileId')
 
@@ -164,9 +165,10 @@ function showProfile() {
                     }
                 }
 
-                // Enable Labels
+                // Enable Labels and avatar edit
                 if(!editing) {
                     toggleInactiveLabels(true)
+                    toggleAvatarEdit(true)
                 }
             })
             .fail(function (msg) {
@@ -192,9 +194,10 @@ function showProfile() {
     }
 
     // Cancel editing
-    function cancelEditing() {
+    function cancelEditing() {        
         if(document.getElementById('cancel-profile-btn')) {
             document.getElementById('cancel-profile-btn').addEventListener('click', function (e) {
+                removeErrors()
                 // Disable Labels
                 toggleInactiveLabels(false)
                 // Special case for social links
@@ -212,6 +215,7 @@ function showProfile() {
     function submitProfile() {
         if(document.getElementById('save-profile-btn')) {
             document.getElementById('save-profile-btn').addEventListener('click', function (e) {
+                removeErrors()
                 // Disable Labels
                 toggleInactiveLabels(false)
                 // Disable save profile button
@@ -261,11 +265,9 @@ function showProfile() {
                     }
                     // toggle editing
                     toggleEditing(false, hasHiddenInputs)
-
-                    console.log(msg)
                 })
-                .fail(function(msg) {
-                    console.log(msg)
+                .fail(function(errors) {
+                    showError(errors.responseJSON.errors)
                 })
         }
         
@@ -312,6 +314,17 @@ function showProfile() {
         activeLabel.disabled = !enable
     }
 
+    function toggleAvatarEdit(enable) {
+        const avatarInput = $('#profile-card-avatar')
+        avatarInput.attr('disabled', !enable)
+        if(!enable) {
+            $('#avatar-edit-btn').html('Wait...')
+        }
+        else {
+            $('#avatar-edit-btn').html('Edit')
+        }
+    }
+
     // Toggle editing
     function toggleEditing(editing, hasHiddenInputs = false) {
         // Toggle editing buttons
@@ -330,9 +343,12 @@ function showProfile() {
             else {
                 // Enable all input fields of active section
                 toggleActiveSectionInputs(true)
+                // Disable inactive labels
+                toggleInactiveLabels(false)
+                toggleActiveLabel(false)
+                // Disable avatar edit
+                toggleAvatarEdit(false)
             }
-            // Disable inactive labels
-            toggleInactiveLabels(false)
         }
         else {
             if(hasHiddenInputs) {
@@ -344,10 +360,12 @@ function showProfile() {
             else {
                 // Disable all inputs fields of active section
                 toggleActiveSectionInputs(false)
+                // Enable inactive labels
+                toggleInactiveLabels(true)
+                // Enable avatar edit
+                toggleAvatarEdit(true)
             }
-            // Enable inactive labels
-            toggleInactiveLabels(true)
-
+            
             // Enable save profile button
             $('#save-profile-btn').html('Save')
             $('#save-profile-btn').attr('disabled', false)
@@ -368,7 +386,7 @@ function showProfile() {
                 // The very first image until save
                 let src = $("#avatar").attr('src')
 
-                $("#profile-card-avatar").change(function() {
+                $("#profile-card-avatar").on('change', function() {
                     readURL(this, src)
                 })
 
@@ -387,6 +405,11 @@ function showProfile() {
         
                 reader.readAsDataURL(input.files[0])
                 showEditBtns()
+                // Disable edit profile button
+                $('#edit-profile-btn').html('...Wait')  
+                $('#edit-profile-btn').attr('disabled', true)
+                // Disable labels
+                toggleInactiveLabels(false) 
             }
             else {
                 cancelAvatar(src)
@@ -395,7 +418,7 @@ function showProfile() {
         // Reset image on cancel
         function cancelAvatarHandler(src = null) {
             if($("#avatar-cancel-btn")) {
-                $("#avatar-cancel-btn").click(function () {
+                $("#avatar-cancel-btn").on('click', function () {
                     cancelAvatar(src) 
                 })
             }
@@ -406,13 +429,22 @@ function showProfile() {
             // Hide save and cancel button
             $('#avatar-save-btn').hide()
             $('#avatar-cancel-btn').hide()
+
+            // Enable labels
+            toggleInactiveLabels(true)
+            // Enable edit profile button
+            $('#edit-profile-btn').html('Edit')  
+            $('#edit-profile-btn').attr('disabled', false)  
         }
         // Save avatar
         function saveAvatar() {
             if($("#avatar-save-btn")) {
-                $("#avatar-save-btn").click(function () {
+                $("#avatar-save-btn").on('click', function () {
+                    // Disable avatar edit button
+                    toggleAvatarEdit(false)
                     // disable cancel and save button and input
                     $(this).attr('disabled', true)
+                    $(this).html('..saving')
                     $("#avatar-cancel-btn").attr('disabled', true)
                     $("#profile-card-avatar").attr('disabled', true)
 
@@ -434,19 +466,98 @@ function showProfile() {
                         success: function(res){
                             $('#avatar').attr('src', res.profile.avatar);
                             // enable cancel and save button and input
+                            $("#avatar-save-btn").html('Save')
                             $("#avatar-save-btn").attr('disabled', false)
                             $("#avatar-save-btn").hide()
                             $("#avatar-cancel-btn").attr('disabled', false)
                             $("#avatar-cancel-btn").hide()
-                            $("#profile-card-avatar").attr('disabled', false)
+                            // Enable labels
+                            toggleInactiveLabels(true)
+                            // Enable edit profile button
+                            $('#edit-profile-btn').html('Edit')  
+                            $('#edit-profile-btn').attr('disabled', false)
+                            // Enable avatar edit button
+                            toggleAvatarEdit(true)
                         },
                         error: function(e){
-                            console.log(e)
+                            showError(e.responseJSON.errors)
+                            // enable cancel and save button and input
+                            $("#avatar-save-btn").html('Save')
+                            $("#avatar-save-btn").attr('disabled', false)
+                            $("#avatar-cancel-btn").attr('disabled', false)
+                            toggleAvatarEdit(true)
                         }
                     })
                 })
             }
         }
+    }
+
+    function removeErrors() {
+        $('.error-msg').remove()
+    }
+
+    // Error handling
+    function showError(errors) {
+        // Social
+        if(errors.hasOwnProperty('name')) {
+            let error = `
+                <p class="error-msg">${errors.name}</p>
+            `
+            $('input#name').after(error)
+        }
+        // About
+        else if(errors.hasOwnProperty('bio')) {
+            let error = `
+                <p class="error-msg">${errors.bio}</p>
+            `
+            $('textarea#bio').after(error)
+        }
+        // Social
+        else if(errors.hasOwnProperty('facebook_link') || errors.hasOwnProperty('twitter_link')) {
+            // Both facebook and twitter
+            if(errors.hasOwnProperty('facebook_link') && errors.hasOwnProperty('twitter_link')) {
+                let error1 = `
+                <p class="error-msg">${errors.facebook_link}</p>
+                `
+                $('input#facebook_link').after(error1)
+
+                let error2 = `
+                <p class="error-msg">${errors.twitter_link}</p>
+                `
+                $('input#twitter_link').after(error2)
+            }
+            // facebook only
+            else if(errors.hasOwnProperty('facebook_link')) {
+                let error = `
+                <p class="error-msg">${errors.facebook_link}</p>
+                `
+                $('input#facebook_link').after(error)
+            }
+            // twitter only
+            else {
+                let error = `
+                <p class="error-msg">${errors.twitter_link}</p>
+                `
+                $('input#twitter_link').after(error)
+            }
+        }
+        // Avatar
+        else if(errors.hasOwnProperty('avatar')) {
+            alert(errors.avatar) 
+        }
+        // Settings
+        else if(errors.hasOwnProperty('settings')) {
+            console.log('settings: ' + errors.settings)
+        }
+        else {
+            console.log(errors)
+        }
+
+        // Enable save profile button
+        $('#save-profile-btn').html('Save')
+        $('#save-profile-btn').attr('disabled', false)
+        $('#cancel-profile-btn').attr('disabled', false)
     }
 }
 
