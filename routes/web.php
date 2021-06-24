@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,8 @@ Route::get('/profile/{profile}/getSocialLinks', [ProfileController::class, 'getS
 
 Route::post('/profile/update', [ProfileController::class, 'update'])
 ->middleware(['auth'])->name('profile.update');
+
+Route::resource('blogs', BlogController::class)
+->middleware(['auth']);
 
 require __DIR__.'/auth.php';

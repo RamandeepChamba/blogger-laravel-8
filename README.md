@@ -3,10 +3,27 @@
 ## TODOS
 
 * Development
+    * Vuejs
+        * Use vuejs on frontend
+    * Forms
+        * Prevent multiple clicking of all the submit buttons
+        * Implement front end data validation 
     * Profile card
         * Make profile card responsive
             * Section labels in a dropdown in small screens 
         * Make it pretty
+        * Add user blogs link
+        * Add followers, following links
+    * Blog
+        * C(done)RUD
+        * Likes
+        * Comments
+        * Categories
+        * Filtering
+        * Favorites
+    * User
+        * Followers 
+    * Notifications
 
 * Production
     * Update mail link with route

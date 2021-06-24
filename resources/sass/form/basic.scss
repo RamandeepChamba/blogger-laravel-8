@@ -1,0 +1,139 @@
+
+#form-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    background: #4e54c8;
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+}
+.data-form {
+    width: 60%;
+    padding: 1.5rem;
+    background-color: #fff;
+
+    input[type="text"], textarea {
+        transition: .2s all;
+        &:focus {
+            --tw-ring-color: transparent;
+            outline: none;
+            border-color: $color-primary-light;
+            border-bottom: 4px solid $color-primary-dark;
+            padding: 1rem;
+
+            &::-webkit-input-placeholder { /* Edge */
+                color: lighten($color-text-grey, 25%);
+            }
+            
+            &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+                color: lighten($color-text-grey, 25%);
+            }
+            
+            &::placeholder {
+                color: lighten($color-text-grey, 25%);
+            }
+        }
+
+        &::-webkit-input-placeholder { /* Edge */
+            color: lighten($color-text-grey, 20%);
+        }
+        
+        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: lighten($color-text-grey, 20%);
+        }
+        
+        &::placeholder {
+            color: lighten($color-text-grey, 20%);
+        }
+    }
+
+    @media screen and (min-width: 600px) {
+        padding: 2rem;
+    }
+    @media screen and (min-width: 1024px) {
+        padding: 2rem 4rem;
+    }
+    @media screen and (min-width: 1366px) {
+        padding: 4rem 6rem;
+    }
+}
+
+#form-heading {
+    font-size: 1.5rem;
+    padding: 1.5rem 0;
+    width: 60%;
+    background-color: $color-primary;
+    color: $color-text-dark;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.data-form, #form-heading {
+    width: 60%;
+
+    @media screen and(max-width: 800px) {
+        width: 80%;
+    }
+
+    @media screen and(max-width: 550px) {
+        width: 100%;
+    }
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+
+    label {
+        margin-bottom: .4rem;
+    }
+}
+#form-btn-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 3rem;
+
+    @media screen and(max-width: 550px) {
+        flex-direction: column;
+    }
+}
+[type="submit"] {
+    flex-basis: 50%;
+    background-color: $color-primary;
+}
+[type="reset"] {
+    flex-grow: 1;
+    background-color: $color-text-dark;
+    color: $color-text-light;
+}
+
+[type="submit"], [type="reset"] {
+    padding: .6rem 0;
+    transition: .2s all;
+
+    &:hover, &:focus {
+        transform: scale(1.1);
+    }
+    &:active {
+        transform: scale(.9);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+
+        &:hover, &:focus {
+            transform: scale(1);
+        }
+        &:active {
+            transform: scale(1);
+        }
+    }
+}
+
+.error-text {
+    color: #D32F2F;
+}

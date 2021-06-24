@@ -12435,6 +12435,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
+__webpack_require__(/*! ./global */ "./resources/js/global.js");
+
 __webpack_require__(/*! ./profile/show */ "./resources/js/profile/show.js");
 
 /***/ }),
@@ -12468,6 +12470,29 @@ window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jqu
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/global.js":
+/*!********************************!*\
+  !*** ./resources/js/global.js ***!
+  \********************************/
+/***/ (() => {
+
+$(function () {
+  // Prevent multiple form submission
+  $('.prevent-multiple-submit').on('click', function (e) {
+    // Prevent form submission
+    e.preventDefault(); // Disable submit and reset button
+
+    $(this).attr('disabled', true);
+    $('[type="reset"]').attr('disabled', true); // Change submit btn text
+
+    $(this).html('...wait'); // Submit form
+
+    this.closest('form').submit();
+  });
+});
 
 /***/ }),
 

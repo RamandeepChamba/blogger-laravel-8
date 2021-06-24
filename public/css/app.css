@@ -295,6 +295,149 @@ a.nav-responsive-link-active {
 #profile-card-info .error-msg {
   color: red;
 }
+
+#form-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  background: #4e54c8;
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+}
+
+.data-form {
+  width: 60%;
+  padding: 1.5rem;
+  background-color: #fff;
+}
+.data-form input[type=text], .data-form textarea {
+  transition: 0.2s all;
+}
+.data-form input[type=text]:focus, .data-form textarea:focus {
+  --tw-ring-color: transparent;
+  outline: none;
+  border-color: #FFECB3;
+  border-bottom: 4px solid #FFA000;
+  padding: 1rem;
+}
+.data-form input[type=text]:focus:-ms-input-placeholder, .data-form textarea:focus:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #d6d6d6;
+}
+.data-form input[type=text]:focus::-moz-placeholder, .data-form textarea:focus::-moz-placeholder {
+  color: #d6d6d6;
+}
+.data-form input[type=text]:focus::placeholder, .data-form textarea:focus::placeholder {
+  color: #d6d6d6;
+}
+.data-form input[type=text]:-ms-input-placeholder, .data-form textarea:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #c9c9c9;
+}
+.data-form input[type=text]::-moz-placeholder, .data-form textarea::-moz-placeholder {
+  color: #c9c9c9;
+}
+.data-form input[type=text]::placeholder, .data-form textarea::placeholder {
+  color: #c9c9c9;
+}
+@media screen and (min-width: 600px) {
+  .data-form {
+    padding: 2rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .data-form {
+    padding: 2rem 4rem;
+  }
+}
+@media screen and (min-width: 1366px) {
+  .data-form {
+    padding: 4rem 6rem;
+  }
+}
+
+#form-heading {
+  font-size: 1.5rem;
+  padding: 1.5rem 0;
+  width: 60%;
+  background-color: #FFC107;
+  color: #212121;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.data-form, #form-heading {
+  width: 60%;
+}
+@media screen and (max-width: 800px) {
+  .data-form, #form-heading {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 550px) {
+  .data-form, #form-heading {
+    width: 100%;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+.form-group label {
+  margin-bottom: 0.4rem;
+}
+
+#form-btn-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 3rem;
+}
+@media screen and (max-width: 550px) {
+  #form-btn-container {
+    flex-direction: column;
+  }
+}
+
+[type=submit] {
+  flex-basis: 50%;
+  background-color: #FFC107;
+}
+
+[type=reset] {
+  flex-grow: 1;
+  background-color: #212121;
+  color: #ecf0f1;
+}
+
+[type=submit], [type=reset] {
+  padding: 0.6rem 0;
+  transition: 0.2s all;
+}
+[type=submit]:hover, [type=submit]:focus, [type=reset]:hover, [type=reset]:focus {
+  transform: scale(1.1);
+}
+[type=submit]:active, [type=reset]:active {
+  transform: scale(0.9);
+}
+[type=submit]:disabled, [type=reset]:disabled {
+  opacity: 0.6;
+}
+[type=submit]:disabled:hover, [type=submit]:disabled:focus, [type=reset]:disabled:hover, [type=reset]:disabled:focus {
+  transform: scale(1);
+}
+[type=submit]:disabled:active, [type=reset]:disabled:active {
+  transform: scale(1);
+}
+
+.error-text {
+  color: #D32F2F;
+}
 /*! tailwindcss v2.1.2 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
