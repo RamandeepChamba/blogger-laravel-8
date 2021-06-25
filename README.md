@@ -3,8 +3,6 @@
 ## TODOS
 
 * Development
-    * Vuejs
-        * Use vuejs on frontend
     * Forms
         * Prevent multiple clicking of all the submit buttons
         * Implement front end data validation 
@@ -16,6 +14,8 @@
         * Add followers, following links
     * Blog
         * C(done)RUD
+            * CU
+                * Complete implementation of text editor
         * Likes
         * Comments
         * Categories
@@ -29,3 +29,7 @@
     * Update mail link with route
     * Profile card
         * Avatar
+    * Blog
+        * CRUD
+            * CU
+                * third party text editor store images
