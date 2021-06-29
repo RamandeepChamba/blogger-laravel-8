@@ -16,10 +16,4 @@ class Blog extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public static function getNextId()
-    {
-        $statement = DB::select("SHOW TABLE STATUS like 'blogs'");
-        return $statement[0]->Auto_increment;
-    }
 }

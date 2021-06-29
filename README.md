@@ -16,6 +16,13 @@
         * C(done)RUD
             * CU
                 * Complete implementation of text editor
+                    * Create resize image module
+                    * Add text align feature
+            * RD
+                * R
+                    * Show blog preview
+                * D
+                    * TODO
         * Likes
         * Comments
         * Categories
