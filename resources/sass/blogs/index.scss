@@ -1,0 +1,92 @@
+#blog-list-container {
+    background: #E44D26;
+    background: linear-gradient(to right, #E44D26, #F16529);
+    padding-top: 8rem;
+
+    @media screen and (max-width: 700px) {
+        padding-top: 5rem;
+    }
+}
+#blog-list {
+    display: flex;
+    flex-direction: column;
+
+}
+.blog-list-item {
+    width: 60%;
+    margin: 0 auto;
+    padding: 2rem;
+    // background: lighten($color-primary, 30%);
+    background: #f3f3f3;
+    color: $color-text-dark;
+    margin-top: 2rem;
+    border-radius: 5px;
+    transition: all .4s;
+
+    &:last-child {
+        margin-bottom: 2rem;
+    }
+
+    @media screen and (max-width: 400px) {
+        font-size: .9rem;
+    }
+    @media screen and (max-width: 700px) {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    &-heading {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+
+        @media screen and (max-width: 400px) {
+            font-size: 1.5rem;
+        }    
+    }
+
+    &-meta {
+        margin: 2rem 0;
+
+        a {
+            color: #C33764;
+            text-decoration: underline;
+
+            &:hover {
+                color: #F16529;
+            }
+        }
+    }
+
+    &-button {
+        background: $color-primary;
+        color: $color-text-dark;
+        padding: .8rem 1.5rem;
+        border-radius: 5px;
+        transition: all .2s;
+
+        &-view {
+            background: $color-text-dark;
+            color: $color-text-light;
+        }
+
+        @media screen and (max-width: 400px) {
+            padding: .6rem 1.2rem;
+        }
+
+        &:not(&:disabled) {
+            &:hover {
+                transform: scale(1.2);
+            }
+            &:active {
+                transform: scale(0.8);
+            }
+        }
+        &:disabled {
+            opacity: .6;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+    }
+}

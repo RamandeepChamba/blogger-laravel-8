@@ -12,6 +12,7 @@
         @stack('fonts')
 
         <!-- Styles -->
+        @stack('styles-prepend')
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         @stack('styles')
 
@@ -20,6 +21,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-white">
+            <!-- Nav -->
             @if (Auth::user())
                 @include('layouts.navigation')
             @endif

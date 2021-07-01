@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800;900&display=swap');
 @import '_variables.scss';
+@import 'reset.scss';
 @import 'layout.scss';
 @import 'welcome.scss';
 @import 'auth/auth-card.scss';
@@ -8,3 +9,5 @@
 @import 'form/basic.scss';
 @import 'blogs/form.scss';
 @import 'blogs/show.scss';
+@import 'blogs/index.scss';
+@import 'custom_quill.scss';

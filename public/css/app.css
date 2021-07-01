@@ -1,4 +1,13 @@
 @import url(https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800;900&display=swap);
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
 body {
   font-family: "Raleway", sans-serif !important;
 }
@@ -138,6 +147,14 @@ button.auth-form-btn {
 button.auth-form-btn:hover {
   background: #FFD200;
   color: #212121;
+}
+
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 #nav-logo {
@@ -302,6 +319,7 @@ a.nav-responsive-link-active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 8rem;
   width: 100%;
   margin: 0 auto;
   background: #4e54c8;
@@ -441,20 +459,22 @@ a.nav-responsive-link-active {
 
 #blog-meta {
   padding: 3rem;
+  padding-top: 8rem;
   background: #fff9e6;
+}
+@media screen and (max-width: 400px) {
+  #blog-meta {
+    padding: 1rem;
+    padding-top: 8rem;
+  }
 }
 #blog-meta #blog-edit-link {
   background: #FFC107;
   color: #212121;
   margin-top: 1rem;
-  padding: 0.6rem 1rem;
-  border-top-right-radius: 50%;
-  border-bottom-left-radius: 50%;
+  padding: 0.6rem 1.3rem;
+  border-radius: 1rem;
   transition: all 0.2s;
-}
-#blog-meta #blog-edit-link:hover, #blog-meta #blog-edit-link:focus, #blog-meta #blog-edit-link:active, #blog-meta #blog-edit-link:disabled {
-  border-bottom-left-radius: 0%;
-  border-top-right-radius: 0%;
 }
 #blog-meta #blog-edit-link:hover {
   transform: scale(1.2);
@@ -477,6 +497,11 @@ a.nav-responsive-link-active {
   font-size: 5rem;
   color: #212121;
 }
+@media screen and (max-width: 400px) {
+  #blog-heading {
+    font-size: 3rem;
+  }
+}
 
 #blog-info {
   display: flex;
@@ -486,7 +511,95 @@ a.nav-responsive-link-active {
 #blog-content {
   border: none;
   background: #fafafa;
-  padding: 5rem;
+  padding-top: 6rem;
+}
+
+#blog-list-container {
+  background: #E44D26;
+  background: linear-gradient(to right, #E44D26, #F16529);
+  padding-top: 8rem;
+}
+@media screen and (max-width: 700px) {
+  #blog-list-container {
+    padding-top: 5rem;
+  }
+}
+
+#blog-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-list-item {
+  width: 60%;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #f3f3f3;
+  color: #212121;
+  margin-top: 2rem;
+  border-radius: 5px;
+  transition: all 0.4s;
+}
+.blog-list-item:last-child {
+  margin-bottom: 2rem;
+}
+@media screen and (max-width: 400px) {
+  .blog-list-item {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (max-width: 700px) {
+  .blog-list-item {
+    width: 95%;
+    padding: 1rem;
+  }
+}
+.blog-list-item-heading {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+@media screen and (max-width: 400px) {
+  .blog-list-item-heading {
+    font-size: 1.5rem;
+  }
+}
+.blog-list-item-meta {
+  margin: 2rem 0;
+}
+.blog-list-item-meta a {
+  color: #C33764;
+  text-decoration: underline;
+}
+.blog-list-item-meta a:hover {
+  color: #F16529;
+}
+.blog-list-item-button {
+  background: #FFC107;
+  color: #212121;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+.blog-list-item-button-view {
+  background: #212121;
+  color: #ecf0f1;
+}
+@media screen and (max-width: 400px) {
+  .blog-list-item-button {
+    padding: 0.6rem 1.2rem;
+  }
+}
+.blog-list-item-button:not(.blog-list-item-button:disabled):hover {
+  transform: scale(1.2);
+}
+.blog-list-item-button:not(.blog-list-item-button:disabled):active {
+  transform: scale(0.8);
+}
+.blog-list-item-button:disabled {
+  opacity: 0.6;
+}
+.blog-list-item-button:focus {
+  outline: 0;
 }
 /*! tailwindcss v2.1.2 | MIT License | https://tailwindcss.com */
 

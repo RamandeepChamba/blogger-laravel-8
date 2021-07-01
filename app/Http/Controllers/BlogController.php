@@ -16,7 +16,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        dd('index');
+        // Fetch all blogs
+        $blogs = Blog::all();
+        return view('blogs.index', compact(['blogs']));
     }
 
     /**

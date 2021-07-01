@@ -30,7 +30,7 @@
         <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
     @endpush
 
-    @push('styles')
+    @push('styles-prepend')
         <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     @endpush
 </x-app-layout>

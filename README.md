@@ -16,7 +16,12 @@
         * Add followers, following links
     * Blog
         * Index page
+            * Filter
+            * Searchbar
+            * Pagination
         * CRUD
+            * CU
+                * Full screen editor
             * D
                 * TODO
         * Likes
