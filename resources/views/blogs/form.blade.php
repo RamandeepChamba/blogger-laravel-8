@@ -35,6 +35,7 @@
 
     @push('scripts')
         <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+        <script src="//cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"></script>
     @endpush
 
     @push('styles')

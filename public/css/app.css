@@ -438,6 +438,56 @@ a.nav-responsive-link-active {
 .error-text {
   color: #D32F2F;
 }
+
+#blog-meta {
+  padding: 3rem;
+  background: #fff9e6;
+}
+#blog-meta #blog-edit-link {
+  background: #FFC107;
+  color: #212121;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  transition: all 0.2s;
+}
+#blog-meta #blog-edit-link:hover, #blog-meta #blog-edit-link:focus, #blog-meta #blog-edit-link:active, #blog-meta #blog-edit-link:disabled {
+  border-bottom-left-radius: 0%;
+  border-top-right-radius: 0%;
+}
+#blog-meta #blog-edit-link:hover {
+  transform: scale(1.2);
+}
+#blog-meta #blog-edit-link:active {
+  transform: scale(0.9);
+}
+#blog-meta #blog-edit-link:focus {
+  outline: none;
+  border: none;
+}
+#blog-meta #blog-edit-link:disabled {
+  opacity: 0.8;
+}
+#blog-meta #blog-edit-link:disabled:hover {
+  transform: scale(1);
+}
+
+#blog-heading {
+  font-size: 5rem;
+  color: #212121;
+}
+
+#blog-info {
+  display: flex;
+  flex-direction: column;
+}
+
+#blog-content {
+  border: none;
+  background: #fafafa;
+  padding: 5rem;
+}
 /*! tailwindcss v2.1.2 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */

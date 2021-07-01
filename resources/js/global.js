@@ -12,4 +12,9 @@ $(function() {
         // Submit form
         this.closest('form').submit()
     })
+
+    $('.disable-after-click').on('click', function (e) {
+        $(this).attr('disabled', true)
+        $(this).html('...wait')
+    })
 })

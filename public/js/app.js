@@ -12441,13 +12441,20 @@ __webpack_require__(/*! ./profile/show */ "./resources/js/profile/show.js");
 
 __webpack_require__(/*! ./blogs/form */ "./resources/js/blogs/form.js");
 
+__webpack_require__(/*! ./blogs/show */ "./resources/js/blogs/show.js");
+
 /***/ }),
 
 /***/ "./resources/js/blogs/form.js":
 /*!************************************!*\
   !*** ./resources/js/blogs/form.js ***!
   \************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _registerCustomImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./registerCustomImage */ "./resources/js/blogs/registerCustomImage.js");
+
 
 if ($('#blog-form-content').length) {
   var showErrors = function showErrors(errors) {
@@ -12474,13 +12481,25 @@ if ($('#blog-form-content').length) {
     $("#blog-form-reset-btn").attr("disabled", !enable);
   };
 
-  var toolbarOptions = [['bold', 'italic', 'underline'], ['blockquote', 'code-block'], ['link', 'image']];
+  var toolbarOptions = [[{
+    'header': []
+  }], [{
+    'size': []
+  }], [{
+    'color': []
+  }, {
+    'background': []
+  }], [{
+    'align': []
+  }], ['bold', 'italic', 'underline'], ['blockquote', 'code-block'], ['link', 'image']];
   var quill = new Quill('#blog-form-content', {
     theme: 'snow',
     modules: {
-      toolbar: toolbarOptions
+      toolbar: toolbarOptions,
+      imageResize: {}
     }
-  }); // If editing
+  });
+  (0,_registerCustomImage__WEBPACK_IMPORTED_MODULE_0__.default)(); // If editing
 
   if ($('#blog-form-content').data('editing') == 1) {
     var content = $('#blog-form-content').data('content');
@@ -12540,6 +12559,135 @@ if ($('#blog-form-content').length) {
 
 /***/ }),
 
+/***/ "./resources/js/blogs/registerCustomImage.js":
+/*!***************************************************!*\
+  !*** ./resources/js/blogs/registerCustomImage.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function registerCustomImageModule() {
+  var Image = Quill["import"]('formats/image'); // Had to get the class this way, instead of ES6 imports, so that quill could register it without errors
+
+  var ATTRIBUTES = ['alt', 'height', 'width', 'class', 'style' // Had to add this line because the style was inlined
+  ];
+
+  var CustomImage = /*#__PURE__*/function (_Image) {
+    _inherits(CustomImage, _Image);
+
+    var _super = _createSuper(CustomImage);
+
+    function CustomImage() {
+      _classCallCheck(this, CustomImage);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(CustomImage, [{
+      key: "format",
+      value: function format(name, value) {
+        if (ATTRIBUTES.indexOf(name) > -1) {
+          if (value) {
+            this.domNode.setAttribute(name, value);
+          } else {
+            this.domNode.removeAttribute(name);
+          }
+        } else {
+          _get(_getPrototypeOf(CustomImage.prototype), "format", this).call(this, name, value);
+        }
+      }
+    }], [{
+      key: "formats",
+      value: function formats(domNode) {
+        return ATTRIBUTES.reduce(function (formats, attribute) {
+          var copy = _objectSpread({}, formats);
+
+          if (domNode.hasAttribute(attribute)) {
+            copy[attribute] = domNode.getAttribute(attribute);
+          }
+
+          return copy;
+        }, {});
+      }
+    }]);
+
+    return CustomImage;
+  }(Image); // Register
+
+
+  Quill.register({
+    // ... other formats
+    'formats/image': CustomImage
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (registerCustomImageModule);
+
+/***/ }),
+
+/***/ "./resources/js/blogs/show.js":
+/*!************************************!*\
+  !*** ./resources/js/blogs/show.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _registerCustomImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./registerCustomImage */ "./resources/js/blogs/registerCustomImage.js");
+
+
+if ($('#blog-content').length) {
+  var quill = new Quill('#blog-content', {
+    theme: 'snow',
+    modules: {
+      toolbar: false
+    },
+    readOnly: true
+  });
+  (0,_registerCustomImage__WEBPACK_IMPORTED_MODULE_0__.default)(); // Set content
+
+  var content = $('#blog-content').data('content');
+  quill.setContents(content);
+}
+
+/***/ }),
+
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -12590,6 +12738,10 @@ $(function () {
     $(this).html('...wait'); // Submit form
 
     this.closest('form').submit();
+  });
+  $('.disable-after-click').on('click', function (e) {
+    $(this).attr('disabled', true);
+    $(this).html('...wait');
   });
 });
 
@@ -57027,6 +57179,18 @@ process.umask = function() { return 0; };
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
 /******/ 		};
 /******/ 	})();
 /******/ 	

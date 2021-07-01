@@ -4,3 +4,4 @@ require('alpinejs');
 require('./global');
 require('./profile/show');
 require('./blogs/form');
+require('./blogs/show');

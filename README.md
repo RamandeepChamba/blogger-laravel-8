@@ -7,22 +7,18 @@
         * Prevent multiple clicking of all the submit buttons
         * Implement front end data validation 
     * Profile card
+        * Bug
+            * Edit buttons - cancel button color
         * Make profile card responsive
             * Section labels in a dropdown in small screens 
         * Make it pretty
         * Add user blogs link
         * Add followers, following links
     * Blog
-        * C(done)RUD
-            * CU
-                * Complete implementation of text editor
-                    * Create resize image module
-                    * Add text align feature
-            * RD
-                * R
-                    * Show blog preview
-                * D
-                    * TODO
+        * Index page
+        * CRUD
+            * D
+                * TODO
         * Likes
         * Comments
         * Categories

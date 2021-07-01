@@ -1,5 +1,12 @@
+import registerCustomImage from "./registerCustomImage";
+
 if($('#blog-form-content').length) {
+    
     var toolbarOptions = [
+        [{ 'header': [] }],
+        [{ 'size': [] }],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'align': [] }],
         ['bold', 'italic', 'underline'],
         ['blockquote', 'code-block'],
         ['link', 'image']
@@ -7,9 +14,13 @@ if($('#blog-form-content').length) {
     var quill = new Quill('#blog-form-content', {
         theme: 'snow',
         modules: {
-            toolbar: toolbarOptions
-        }
+            toolbar: toolbarOptions,
+            imageResize: {},
+        },
     })
+
+    registerCustomImage()
+
     // If editing
     if($('#blog-form-content').data('editing') == 1) {
         var content = $('#blog-form-content').data('content')
